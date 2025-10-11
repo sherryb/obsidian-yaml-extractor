@@ -12,10 +12,11 @@ try:
 except ImportError as e:
     print(e)
 
-#----------------------------------
-# Hardcoded Directory for Now
-#----------------------------------
-#user_dir = "C:\\Users\\brend\\Vault\\Vault\\01 Personal\\Daily Notes\\"
+#--------------------------------
+# Get the Obsidian daily notes directory from the user.
+# Note for users: on windows this is typically C:\Users\{Username}\Obsidian\Vault\{etc}
+# Refer to Obsidian to get the actual vault directory if needed.
+#--------------------------------
 user_dir = input("Please enter the Obsidian daily notes directory:\n")
 
 
