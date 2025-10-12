@@ -25,6 +25,7 @@ user_dir = input("Please enter the Obsidian daily notes directory:\n")
 #----------------------------------
 def parse_yaml(dailynote):
 
+    # The magic regex
     pattern = re.compile(r"^---\s*\n(.*?)\n---\s*", re.DOTALL | re.MULTILINE)
 
     yaml_chunks = []
@@ -41,6 +42,8 @@ def parse_yaml(dailynote):
 
 #----------------------------------
 # Get Data - iterate through documents and parse the text
+# I haven't fully tested this but I think it will work as intended.
+# It certainly does for now but I may need to refactor this slightly when 2026 rolls around.
 #----------------------------------
 def get_data():
     all_yaml_data = []
@@ -80,13 +83,13 @@ def get_data():
 
 
 
-def write_csv(datadict : dict):
+def prepare_csv(datadict : dict):
 
     if isinstance(datadict, dict):
         datadict = [datadict]
 
     elif not isinstance(datadict, list):
-        raise ValueError("Must pass dict or list of dicts")
+        raise TypeError("Must pass dict or list of dicts")
 
     headers = sorted({key for item in datadict for key in item.keys()})
 
@@ -101,7 +104,7 @@ def write_csv(datadict : dict):
 
 if __name__ == "__main__":
     yamldata = get_data()
-    csv = write_csv(yamldata)
+    csv = prepare_csv(yamldata)
 
     with open("output.csv", "w", newline="") as f:
         f.write(csv)
