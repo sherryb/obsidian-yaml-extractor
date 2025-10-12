@@ -8,6 +8,7 @@ try:
     import yaml
     import csv
     from io import StringIO
+    from datetime import datetime
 
 except ImportError as e:
     print(e)
@@ -106,7 +107,8 @@ if __name__ == "__main__":
     yamldata = get_data()
     csv = prepare_csv(yamldata)
 
-    with open("output.csv", "w", newline="") as f:
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    with open(f"output-{timestamp}.csv", "w", newline="") as f:
         f.write(csv)
         print("Daily note data dumped to CSV, have a nice day :)")
 
