@@ -107,8 +107,12 @@ if __name__ == "__main__":
     yamldata = get_data()
     csv = prepare_csv(yamldata)
 
+    outputdir = input("Please enter the output directory: ")
+    if not os.path.isdir(outputdir):
+        os.mkdir(outputdir)
+
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    with open(f"output-{timestamp}.csv", "w", newline="") as f:
+    with open(f"{outputdir}\\output-{timestamp}.csv", "w", newline="") as f:
         f.write(csv)
         print("Daily note data dumped to CSV, have a nice day :)")
 
